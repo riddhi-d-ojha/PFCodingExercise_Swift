@@ -63,7 +63,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="PropertyFinder.ae" id="2aZ-Qb-f3P">
-                        <barButtonItem key="rightBarButtonItem" title="Sort" id="9dL-ud-kzL">
+                        <barButtonItem key="rightBarButtonItem" image="sort" style="plain" id="9dL-ud-kzL">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
                                 <action selector="handleRefresh" destination="xKS-uc-UjR" id="sL0-yB-A89"/>
                             </connections>
@@ -99,5 +100,6 @@
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
+        <image name="sort" width="25" height="25"/>
     </resources>
 </document>
