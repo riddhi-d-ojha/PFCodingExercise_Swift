@@ -7,9 +7,14 @@
 //
 
 import UIKit
-private let useAutosizingCells = true
+
+private let useAutosizingCells = false
 
 class TableViewController: UITableViewController {
+    
+    fileprivate let downloadQueue = DispatchQueue(label: "ru.codeispoetry.downloadQueue", qos: DispatchQoS.background)
+    fileprivate var cache = NSCache<NSURL, UIImage>()
+
     
     fileprivate let cellIdentifier = "Cell"
     fileprivate var currentPage = 0
@@ -22,8 +27,8 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
         
         if useAutosizingCells && tableView.responds(to: #selector(getter: UIView.layoutMargins)) {
-            tableView.estimatedRowHeight = 88
-            tableView.rowHeight = UITableViewAutomaticDimension
+            tableView.rowHeight = 100
+//            tableView.rowHeight = UITableViewAutomaticDimension
         }
         
         // Set custom indicator
@@ -162,11 +167,24 @@ extension TableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! PropertyTableViewCell
         let list = properties[indexPath.row]
         
-        cell.textLabel?.text = list.author
-        cell.detailTextLabel?.text = "Price \(list.priceInString!) | Bedrooms \(list.bedrooms!)"
+        cell.subjectText?.text = list.author
+        cell.priceText?.text = "Price \(list.priceInString!) | Bedrooms \(list.bedrooms!)"
+        
+        let image = cache.object(forKey: list.url as NSURL)
+        
+        cell.propertyImage.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        cell.propertyImage.image = image
+        
+        if image == nil {
+            downloadPhoto(list.url, completion: { (url, image) -> Void in
+                tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
+            })
+        }
+        
+        
         
         if useAutosizingCells && tableView.responds(to: #selector(getter: UIView.layoutMargins)) {
             cell.textLabel?.numberOfLines = 0
@@ -212,8 +230,37 @@ extension TableViewController {
         return url!
     }
     
+    // MARK: - Private
+    
+    fileprivate func downloadPhoto(_ url: URL, completion: @escaping (_ url: URL, _ image: UIImage) -> Void) {
+        downloadQueue.async(execute: { () -> Void in
+            if let image = self.cache.object(forKey: url as NSURL) {
+                DispatchQueue.main.async {
+                    completion(url, image)
+                }
+                
+                return
+            }
+            
+            do {
+                let data = try Data(contentsOf: url)
+                
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self.cache.setObject(image, forKey: url as NSURL)
+                        completion(url, image)
+                    }
+                } else {
+                    print("Could not decode image")
+                }
+            } catch {
+                print("Could not load URL: \(url): \(error)")
+            }
+        })
+    }
+    
     fileprivate func fetchData(_ handler: @escaping ((FetchResult) -> Void)) {
-        let hits = Int(tableView.bounds.height) / 44
+        let hits = Int(tableView.bounds.height) / 200
         let requestURL = apiURL(hits, page: currentPage)
         
         let task = URLSession.shared.dataTask(with: requestURL, completionHandler: {

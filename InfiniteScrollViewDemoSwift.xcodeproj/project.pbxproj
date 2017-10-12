@@ -17,6 +17,7 @@
 		58279C011AF6C8650075D88A /* CustomInfiniteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58279C001AF6C8650075D88A /* CustomInfiniteIndicator.swift */; };
 		58279C081AF6DC9C0075D88A /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 58279C071AF6DC9C0075D88A /* UIScrollView+InfiniteScroll.m */; };
 		582A4ABF1DD8AB2D008203BA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 582A4AC11DD8AB2D008203BA /* Localizable.strings */; };
+		FD9F3E141F9009F20028FAFF /* PropertyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9F3E131F9009F20028FAFF /* PropertyTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		58279C061AF6DC9C0075D88A /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+InfiniteScroll.h"; path = "Classes/UIScrollView+InfiniteScroll.h"; sourceTree = SOURCE_ROOT; };
 		58279C071AF6DC9C0075D88A /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+InfiniteScroll.m"; path = "Classes/UIScrollView+InfiniteScroll.m"; sourceTree = SOURCE_ROOT; };
 		582A4AC01DD8AB2D008203BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FD9F3E131F9009F20028FAFF /* PropertyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			children = (
 				58279BC01AF6AC5D0075D88A /* InfiniteScrollViewDemoSwift */,
 				58279BBF1AF6AC5D0075D88A /* Products */,
+				FD9F3E421F9011480028FAFF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +74,7 @@
 				58279BC31AF6AC5D0075D88A /* AppDelegate.swift */,
 				58279C001AF6C8650075D88A /* CustomInfiniteIndicator.swift */,
 				58279BF21AF6ADCA0075D88A /* TableViewController.swift */,
+				FD9F3E131F9009F20028FAFF /* PropertyTableViewCell.swift */,
 				58279BFE1AF6C4E50075D88A /* UIApplication+NetworkIndicator.swift */,
 				58279BCC1AF6AC5D0075D88A /* Images.xcassets */,
 				58279BEF1AF6AD2C0075D88A /* Classes */,
@@ -105,6 +109,13 @@
 				58279BFC1AF6B2730075D88A /* ListModel.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		FD9F3E421F9011480028FAFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD9F3E141F9009F20028FAFF /* PropertyTableViewCell.swift in Sources */,
 				58279C011AF6C8650075D88A /* CustomInfiniteIndicator.swift in Sources */,
 				58279BFF1AF6C4E50075D88A /* UIApplication+NetworkIndicator.swift in Sources */,
 				58279BF31AF6ADCA0075D88A /* TableViewController.swift in Sources */,
@@ -300,6 +312,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = PR2A98QJ89;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InfiniteScrollViewDemoSwift",
+				);
 				INFOPLIST_FILE = InfiniteScrollViewDemoSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.codeispoetry.Infinite-Scroll-Swift";
@@ -317,6 +333,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = PR2A98QJ89;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InfiniteScrollViewDemoSwift",
+				);
 				INFOPLIST_FILE = InfiniteScrollViewDemoSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.codeispoetry.Infinite-Scroll-Swift";
